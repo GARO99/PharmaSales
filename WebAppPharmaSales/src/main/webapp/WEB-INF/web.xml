@@ -8,6 +8,10 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RuterController</servlet-name>
+        <servlet-class>Controllers.RuterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthController</servlet-name>
         <url-pattern>/AuthController</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RuterController</servlet-name>
+        <url-pattern>/RuterController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
