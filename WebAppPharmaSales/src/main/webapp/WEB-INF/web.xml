@@ -18,11 +18,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
-        <url-pattern>/HomeController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RuterController</servlet-name>
-        <url-pattern>/RuterController</url-pattern>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
