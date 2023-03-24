@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="Utils.Constants.NavConstans" %>
             <!-- /.navbar -->
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -47,8 +48,8 @@
                         </li>
                       </ul>
                     </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
+                    <li class="nav-item <%= NavConstans.NEW_SALES.equals(request.getParameter("action")) || NavConstans.RECORDS_SALES.equals(request.getParameter("action"))? " menu-open": ""%>">
+                        <a href="#" class="nav-link<%= NavConstans.NEW_SALES.equals(request.getParameter("action")) || NavConstans.RECORDS_SALES.equals(request.getParameter("action"))? " active": ""%>">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                           Ventas
@@ -57,13 +58,13 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="pages/UI/general.html" class="nav-link">
+                          <a href="sales?action=<%= NavConstans.NEW_SALES %>" class="nav-link<%= NavConstans.NEW_SALES.equals(request.getParameter("action"))? " active": ""%>">
                             <i class="nav-icon fas fa-cart-plus"></i>
                             <p>Nueva</p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="pages/UI/icons.html" class="nav-link">
+                            <a href="sales?action=<%= NavConstans.RECORDS_SALES %>" class="nav-link<%= NavConstans.RECORDS_SALES.equals(request.getParameter("action"))? " active": ""%>">
                             <i class="nav-icon fas fa-shopping-basket"></i>
                             <p>Registro</p>
                           </a>

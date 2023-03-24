@@ -6,6 +6,7 @@ package Controllers;
 
 import Utils.Constants.NavConstans;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo Andres Romero Ordoñez
  */
-public class HomeController extends HttpServlet {
+public class SalesController extends HttpServlet {
 
+    private NavConstans NavEnum;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -28,7 +30,17 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("homeview/index.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        switch (action) {
+            case NavConstans.NEW_SALES:
+                request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
+                break;
+            case NavConstans.RECORDS_SALES:
+                request.getRequestDispatcher("salesview/records.jsp").forward(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
