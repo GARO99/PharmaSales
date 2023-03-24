@@ -5,23 +5,22 @@ package Models;
  * @author PERSONAL
  */
 public class Employees {
+
     String IDENTIFICATION_NUMBER_EMPLOYEE;
     String FIRSTNAME;
     String LASTNAME;
     String PHONE;
-    String USER;
     String ADDRESS;
     int FK_ID_IDENTIIFICATION_TYPE;
-    
+
     public Employees() {
     }
 
-    public Employees(String IDENTIFICATION_NUMBER_EMPLOYEE, String FIRSTNAME, String LASTNAME, String PHONE, String USER, String ADDRESS, int FK_ID_IDENTIIFICATION_TYPE) {
+    public Employees(String IDENTIFICATION_NUMBER_EMPLOYEE, String FIRSTNAME, String LASTNAME, String PHONE, String ADDRESS, int FK_ID_IDENTIIFICATION_TYPE) {
         this.IDENTIFICATION_NUMBER_EMPLOYEE = IDENTIFICATION_NUMBER_EMPLOYEE;
         this.FIRSTNAME = FIRSTNAME;
         this.LASTNAME = LASTNAME;
         this.PHONE = PHONE;
-        this.USER = USER;
         this.ADDRESS = ADDRESS;
         this.FK_ID_IDENTIIFICATION_TYPE = FK_ID_IDENTIIFICATION_TYPE;
     }
@@ -58,14 +57,6 @@ public class Employees {
         this.PHONE = PHONE;
     }
 
-    public String getUSER() {
-        return USER;
-    }
-
-    public void setUSER(String USER) {
-        this.USER = USER;
-    }
-
     public String getADDRESS() {
         return ADDRESS;
     }
@@ -81,7 +72,5 @@ public class Employees {
     public void setFK_ID_IDENTIIFICATION_TYPE(int FK_ID_IDENTIIFICATION_TYPE) {
         this.FK_ID_IDENTIIFICATION_TYPE = FK_ID_IDENTIIFICATION_TYPE;
     }
-    
-    
-    
+
 }
