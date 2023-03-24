@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import DAO.EmployeesDAO;
+import Models.Employees;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AuthController extends HttpServlet {
 
+    EmployeesDAO edao = new EmployeesDAO();
+    Employees em = new Employees();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -69,7 +74,19 @@ public class AuthController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("Login")) {
+            String user = request.getParameter("txtuser");
+            String pwd = request.getParameter("txtpwd");
+            em = edao.validate(user, pwd);
+            if (em.getUSER() != null) {
+                request.getRequestDispatcher("home").forward(request, response);
+            } else {
+                request.getRequestDispatcher("loginview/login.jsp").forward(request, response);
+            }
+        } else {
+            request.getRequestDispatcher("loginview/login.jsp").forward(request, response);
+        }
     }
 
     /**

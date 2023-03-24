@@ -8,13 +8,21 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SalesController</servlet-name>
+        <servlet-class>Controllers.SalesController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthController</servlet-name>
         <url-pattern>/AuthController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
-        <url-pattern>/HomeController</url-pattern>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalesController</servlet-name>
+        <url-pattern>/sales</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
