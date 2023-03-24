@@ -73,4 +73,8 @@ public class Employees {
         this.FK_ID_IDENTIIFICATION_TYPE = FK_ID_IDENTIIFICATION_TYPE;
     }
 
+    public Object getUSER() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

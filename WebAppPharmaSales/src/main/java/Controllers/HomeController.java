@@ -4,8 +4,8 @@
  */
 package Controllers;
 
+import Utils.Constants.NavConstans;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,15 +28,7 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        switch (action) {
-            case "Principal":
-                request.getRequestDispatcher("homeview/index.jsp").forward(request, response);
-                break;
-            default:
-                throw new AssertionError();
-        }
-
+        request.getRequestDispatcher("homeview/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

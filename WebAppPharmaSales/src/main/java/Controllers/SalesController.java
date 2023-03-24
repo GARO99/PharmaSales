@@ -4,8 +4,7 @@
  */
 package Controllers;
 
-import DAO.EmployeesDAO;
-import Models.Employees;
+import Utils.Constants.NavConstans;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,13 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Gustavo Andres Romero Ordoñez 
+ * @author Gustavo Andres Romero Ordoñez
  */
-public class AuthController extends HttpServlet {
+public class SalesController extends HttpServlet {
 
-    EmployeesDAO edao = new EmployeesDAO();
-    Employees em = new Employees();
-    
+    private NavConstans NavEnum;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,18 +30,16 @@ public class AuthController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AuthController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AuthController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("action");
+        switch (action) {
+            case NavConstans.NEW_SALES:
+                request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
+                break;
+            case NavConstans.RECORDS_SALES:
+                request.getRequestDispatcher("salesview/records.jsp").forward(request, response);
+                break;
+            default:
+                throw new AssertionError();
         }
     }
 
@@ -74,19 +69,7 @@ public class AuthController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action.equalsIgnoreCase("Login")) {
-            String user = request.getParameter("txtuser");
-            String pwd = request.getParameter("txtpwd");
-            em = edao.validate(user, pwd);
-            if (em.getUSER() != null) {
-                request.getRequestDispatcher("home").forward(request, response);
-            } else {
-                request.getRequestDispatcher("loginview/login.jsp").forward(request, response);
-            }
-        } else {
-            request.getRequestDispatcher("loginview/login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
