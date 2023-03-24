@@ -80,7 +80,7 @@ public class AuthController extends HttpServlet {
             String pwd = request.getParameter("txtpwd");
             em = edao.validate(user, pwd);
             if (em.getUSER() != null) {
-                request.getRequestDispatcher("HomeController?action=Principal").forward(request, response);
+                request.getRequestDispatcher("home").forward(request, response);
             } else {
                 request.getRequestDispatcher("loginview/login.jsp").forward(request, response);
             }
