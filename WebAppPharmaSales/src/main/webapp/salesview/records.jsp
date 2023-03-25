@@ -29,7 +29,44 @@
     <!-- /.content-header -->
     <section class="content">
         <div class="container-fluid">
+            <div class="card">
+              <div class="card-body">
+                <table id="recordSalesDatatable" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Numero factura</th>
+                    <th>Fecha</th>
+                    <th>Empleado</th>
+                    <th>Cliente</th>
+                    <th>SubTotal</th>
+                    <th>Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
         </div>
     </section>
 </div>
 <%@ include file="../share/footer.jsp.jsp" %>
+<script>
+$(function () {
+    $('#recordSalesDatatable').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+      }
+    });
+});
+</script>
