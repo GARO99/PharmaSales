@@ -8,16 +8,18 @@ public class Products {
     String PRODUCT_CODE;
     String PRODUCT_NAME;
     float IVA_PERCENT;
-    int STOCKABLE;
+    boolean STOCKABLE;
+    private float PRICE;
 
     public Products() {
     }
 
-    public Products(String PRODUCT_CODE, String PRODUCT_NAME, float IVA_PERCENT, int STOCKABLE) {
+    public Products(String PRODUCT_CODE, String PRODUCT_NAME, float IVA_PERCENT, boolean STOCKABLE, float PRICE) {
         this.PRODUCT_CODE = PRODUCT_CODE;
         this.PRODUCT_NAME = PRODUCT_NAME;
         this.IVA_PERCENT = IVA_PERCENT;
         this.STOCKABLE = STOCKABLE;
+        this.PRICE = PRICE;
     }
 
     public String getPRODUCT_CODE() {
@@ -44,14 +46,19 @@ public class Products {
         this.IVA_PERCENT = IVA_PERCENT;
     }
 
-    public int getSTOCKABLE() {
+    public boolean getSTOCKABLE() {
         return STOCKABLE;
     }
 
-    public void setSTOCKABLE(int STOCKABLE) {
+    public void setSTOCKABLE(boolean STOCKABLE) {
         this.STOCKABLE = STOCKABLE;
     }
-    
-    
-    
+
+    public float getPRICE() {
+        return PRICE;
+    }
+
+    public void setPRICE(float PRICE) {
+        this.PRICE = PRICE;
+    }
 }

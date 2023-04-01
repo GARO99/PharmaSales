@@ -14,12 +14,35 @@ import java.util.ArrayList;
  */
 public class ProductsDAO {
 
-    ConnectionDb cn = new ConnectionDb();
+    ConnectionDb cn = new ConnectionDb();    
+    ProductCostDAO pcdao = new ProductCostDAO();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     
-    ProductCostDAO pcdao = new ProductCostDAO();
+    public Products getProduct(String productCode){
+        Products product = new Products();
+        String query = "SELECT p.*, pc.PRICE FROM Products p\n" +
+                        "INNER JOIN product_cost pc ON pc.FK_PRODUCT_CODE = p.PRODUCT_CODE\n" +
+                        "WHERE p.PRODUCT_CODE = ? AND pc.END_DATE IS NULL";
+        try {
+            con = cn.GetConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, productCode);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                product.setPRODUCT_CODE(rs.getString("PRODUCT_CODE"));
+                product.setPRODUCT_NAME(rs.getString("PRODUCT_NAME"));
+                product.setIVA_PERCENT(rs.getFloat("IVA_PERCENT"));
+                product.setSTOCKABLE(rs.getBoolean("STOCKABLE"));
+                product.setPRICE(rs.getFloat("PRICE"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return product;
+    }
 
     public ArrayList<Products> getProducts() {
         Products pt;
@@ -35,7 +58,7 @@ public class ProductsDAO {
                 pt = new Products();
                 pt.setPRODUCT_CODE(rs.getString("PRODUCT_CODE"));
                 pt.setPRODUCT_NAME(rs.getString("PRODUCT_NAME"));
-                pt.setSTOCKABLE(rs.getInt("STOCKABLE"));
+                pt.setSTOCKABLE(rs.getBoolean("STOCKABLE"));
                 pt.setIVA_PERCENT(rs.getFloat("IVA_PERCENT"));
                 pts.add(pt);
             }
