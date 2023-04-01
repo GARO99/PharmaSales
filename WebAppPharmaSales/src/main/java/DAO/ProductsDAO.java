@@ -1,7 +1,9 @@
 package DAO;
+
 import Config.ConnectionDb;
 import Models.Products;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,7 +13,9 @@ import java.util.ArrayList;
  * @author PERSONAL
  */
 public class ProductsDAO {
-    ConnectionDb cn = new ConnectionDb();
+
+    ConnectionDb cn = new ConnectionDb();    
+    ProductCostDAO pcdao = new ProductCostDAO();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
@@ -39,16 +43,16 @@ public class ProductsDAO {
         
         return product;
     }
-    
-    public ArrayList<Products> getProducts(){
+
+    public ArrayList<Products> getProducts() {
         Products pt;
         ArrayList<Products> pts = new ArrayList<Products>();
         String query = "SELECT * FROM Products";
-        
+
         try {
             con = cn.GetConnection();
             ps = con.prepareStatement(query);
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 pt = new Products();
@@ -58,11 +62,41 @@ public class ProductsDAO {
                 pt.setIVA_PERCENT(rs.getFloat("IVA_PERCENT"));
                 pts.add(pt);
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         return pts;
     }
-    
+
+    public void addProducts(
+            String code,
+            String name,
+            float iva,
+            float price,
+            Date beginDate,
+            Date endDate,
+            boolean stockeable) {
+
+        String query = "INSERT INTO Products VALUES (?, ?, ?, ?)";
+
+        try {
+            con = cn.GetConnection();
+            ps = con.prepareStatement(query);
+
+            ps.setString(1, code);
+            ps.setString(2, name);
+            ps.setFloat(3, iva);
+            ps.setBoolean(4, stockeable);
+
+            ps.executeUpdate();
+            
+            pcdao.addProductCost(code, price, beginDate, endDate);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }

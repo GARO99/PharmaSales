@@ -1,5 +1,7 @@
 package Models;
 
+import java.sql.Date;
+
 /**
  *
  * @author PERSONAL
@@ -7,14 +9,14 @@ package Models;
 public class Product_Cost {
     int ID_PRODUCT_COST;
     float PRICE;
-    String START_DATE;
-    String END_DATE;
+    Date START_DATE;
+    Date END_DATE;
     String FK_PRODUCT_CODE;
 
     public Product_Cost() {
     }
 
-    public Product_Cost(int ID_PRODUCT_COST, float PRICE, String START_DATE, String END_DATE, String FK_PRODUCT_CODE) {
+    public Product_Cost(int ID_PRODUCT_COST, float PRICE, Date START_DATE, Date END_DATE, String FK_PRODUCT_CODE) {
         this.ID_PRODUCT_COST = ID_PRODUCT_COST;
         this.PRICE = PRICE;
         this.START_DATE = START_DATE;
@@ -38,19 +40,19 @@ public class Product_Cost {
         this.PRICE = PRICE;
     }
 
-    public String getSTART_DATE() {
+    public Date getSTART_DATE() {
         return START_DATE;
     }
 
-    public void setSTART_DATE(String START_DATE) {
+    public void setSTART_DATE(Date START_DATE) {
         this.START_DATE = START_DATE;
     }
 
-    public String getEND_DATE() {
+    public Date getEND_DATE() {
         return END_DATE;
     }
 
-    public void setEND_DATE(String END_DATE) {
+    public void setEND_DATE(Date END_DATE) {
         this.END_DATE = END_DATE;
     }
 

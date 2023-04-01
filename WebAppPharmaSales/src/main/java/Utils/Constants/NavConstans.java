@@ -11,4 +11,8 @@ package Utils.Constants;
 public class NavConstans {
     public static final String NEW_SALES = "newSales";
     public static final String RECORDS_SALES = "recordsSales";
+    
+    public static final String  PRODUCTS_MAINTENANCE = "productsMaintenance";
+    public static final String  CUSTOMERS_MAINTENANCE = "customersMaintenance";
+    public static final String  EMPLOYEES_MAINTENANCE = "employeesMaintenance";
 }
