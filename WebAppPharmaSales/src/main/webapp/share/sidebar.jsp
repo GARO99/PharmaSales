@@ -19,8 +19,12 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
+                    <li class="nav-item <%= NavConstans.PRODUCTS_MAINTENANCE.equals(request.getParameter("action")) ||
+                                            NavConstans.CUSTOMERS_MAINTENANCE.equals(request.getParameter("action")) ||
+                                            NavConstans.EMPLOYEES_MAINTENANCE.equals(request.getParameter("action"))? "menu-open": "" %>">
+                      <a href="#" class="nav-link <%= NavConstans.PRODUCTS_MAINTENANCE.equals(request.getParameter("action")) ||
+                                                      NavConstans.CUSTOMERS_MAINTENANCE.equals(request.getParameter("action")) ||
+                                                      NavConstans.EMPLOYEES_MAINTENANCE.equals(request.getParameter("action"))? "active": "" %>">
                         <i class="nav-icon fas fa-wrench"></i>
                         <p>
                           Mantenimiento
@@ -29,19 +33,19 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="maintenance?action=<%= NavConstans.PRODUCTS_MAINTENANCE %>" class="nav-link <%= NavConstans.PRODUCTS_MAINTENANCE.equals(request.getParameter("action"))? " active": ""%>">
                             <i class="nav-icon fas fa-shopping-bag"></i>
                             <p>Productos</p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="pages/charts/flot.html" class="nav-link">
+                          <a href="maintenance?action=<%= NavConstans.CUSTOMERS_MAINTENANCE %>" class="nav-link <%= NavConstans.CUSTOMERS_MAINTENANCE.equals(request.getParameter("action"))? " active": ""%>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Clientes</p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="pages/charts/inline.html" class="nav-link">
+                          <a href="maintenance?action=<%= NavConstans.EMPLOYEES_MAINTENANCE %>" class="nav-link <%= NavConstans.EMPLOYEES_MAINTENANCE.equals(request.getParameter("action"))? " active": ""%>">
                             <i class="nav-icon fas fa-user-tie"></i>
                             <p>Empleados</p>
                           </a>

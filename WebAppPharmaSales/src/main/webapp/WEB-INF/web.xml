@@ -13,8 +13,8 @@
         <servlet-class>Controllers.SalesController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewSalesController</servlet-name>
-        <servlet-class>Controllers.NewSalesController</servlet-class>
+        <servlet-name>MaintenanceController</servlet-name>
+        <servlet-class>Controllers.MaintenanceController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AuthController</servlet-name>
@@ -29,8 +29,8 @@
         <url-pattern>/sales</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewSalesController</servlet-name>
-        <url-pattern>/newsales</url-pattern>
+        <servlet-name>MaintenanceController</servlet-name>
+        <url-pattern>/maintenance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
