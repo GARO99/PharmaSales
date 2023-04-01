@@ -5,10 +5,19 @@
 package Controllers;
 
 import DAO.CustomersDAO;
+import DAO.OrderDAO;
+import DAO.ProductsDAO;
 import Models.Customers;
+import Models.Order;
+import Models.Order_Details;
+import Models.Products;
 import Utils.Constants.NavConstans;
+import Utils.Constants.NewSalesAcctionConstans;
+import ViewModels.OrderDetailView;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +28,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author Gustavo Andres Romero Ordoñez
  */
 public class SalesController extends HttpServlet {
+    Customers customers = null;
+    CustomersDAO customersDao = new CustomersDAO();
+    Products products = null;
+    ProductsDAO productsDAO = new ProductsDAO();
+    OrderDAO orderDAO =  new OrderDAO();
+    List<OrderDetailView> orderDetailViewList = new ArrayList<>();
+    float total = 0;
+    float subTotal = 0;
     
-    Customers cu = new Customers();
-    CustomersDAO cdao = new CustomersDAO();
-
-    private NavConstans NavEnum;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,6 +51,11 @@ public class SalesController extends HttpServlet {
         String action = request.getParameter("action");
         switch (action) {
             case NavConstans.NEW_SALES:
+                request.setAttribute("customers", this.customers);
+                request.setAttribute("product", this.products);
+                request.setAttribute("orderList", this.orderDetailViewList);
+                request.setAttribute("total", this.total);
+                request.setAttribute("subTotal", this.subTotal);
                 request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
                 break;
             case NavConstans.RECORDS_SALES:
@@ -75,20 +93,58 @@ public class SalesController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
-        if (search.equalsIgnoreCase("searchCustomer")) {
-            String idType = request.getParameter("idType");
-            String idNumber = request.getParameter("idNumber");
-            cu = cdao.getCustomer(idNumber, idType);
-            if (cu.getIDENTIFICATION_NUMBER_CUSTOMER() != null) {
-                request.setAttribute("customers", cu);
-                request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
-            }else{
-                request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
-            }
-        }else{
-            request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
+        String search = request.getParameter("formAction");
+        switch (search) {
+            case NewSalesAcctionConstans.SEARCH_CUSTOMERS:
+                String idType = request.getParameter("idType");
+                String idNumber = request.getParameter("idNumber");
+                customers  = customersDao.getCustomer(idNumber, idType);
+                break;
+            case NewSalesAcctionConstans.SEARCH_PRODUCT:
+                String productCode = request.getParameter("productCode");
+                products = productsDAO.getProduct(productCode);
+                break;
+            case NewSalesAcctionConstans.ADD_PRODUCT:
+                int Quantity = Integer.parseInt(request.getParameter("quantity"));
+                float subTotal = products.getPRICE() * Quantity;
+                float taxIva = subTotal * (products.getIVA_PERCENT()/100);
+                float total = subTotal + taxIva; 
+                OrderDetailView order = new OrderDetailView(products.getPRODUCT_CODE(), products.getPRODUCT_NAME(),
+                        products.getPRICE(), products.getIVA_PERCENT(), Quantity, subTotal, total);
+                orderDetailViewList.add(order);
+                this.total = 0;
+                this.subTotal = 0;
+                for (OrderDetailView orderDetail : orderDetailViewList) {
+                    this.total += orderDetail.getTOTAL();
+                    this.subTotal += orderDetail.getSUB_TOTAL();
+                }
+                products = null;
+                break;
+            case NewSalesAcctionConstans.ADD_ORDER:
+                orderDAO.SaveOrder(new Order(0, "1217652135", customers.getIDENTIFICATION_NUMBER_CUSTOMER(), new Date(), this.subTotal, this.total));
+                for (OrderDetailView orderDetail : orderDetailViewList) {
+                    orderDAO.SaveDatailOrder(new Order_Details(0, orderDetail.getQUANTITY(),orderDetail.getSUB_TOTAL(), orderDAO.IdOrder(),orderDetail.getFK_PRODUCT_CODE()));
+                }
+                this.customers =  null;
+                this.products =  null;
+                this.orderDetailViewList = new ArrayList<>();
+                this.total = 0;
+                this.subTotal = 0;
+                break;
+            case NewSalesAcctionConstans.CANCEL_ORDER:
+                this.customers =  null;
+                this.products =  null;
+                this.orderDetailViewList = new ArrayList<>();
+                this.total = 0;
+                this.subTotal = 0;
+                break;
         }
+        request.setAttribute("customers", this.customers);
+        request.setAttribute("product", this.products);
+        request.setAttribute("orderList", this.orderDetailViewList);
+        request.setAttribute("total", this.total);
+        request.setAttribute("subTotal", this.subTotal);
+        request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
     }
 
     /**

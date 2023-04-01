@@ -1,5 +1,8 @@
 package Models;
 
+import java.util.Date;
+
+
 /**
  *
  * @author PERSONAL
@@ -8,14 +11,14 @@ public class Order {
     int ID_ORDER;
     String FK_IDENTIFICATION_NUMBER_EMPLOYEE;
     String FK_IDENTIFICATION_NUMBER_CUSTOMER;
-    String DATE_ORDER;
+    Date  DATE_ORDER;
     float SUBTOTAL;
     float TOTAL;
 
     public Order() {
     }
 
-    public Order(int ID_ORDER, String FK_IDENTIFICATION_NUMBER_EMPLOYEE, String FK_IDENTIFICATION_NUMBER_CUSTOMER, String DATE_ORDER, float SUBTOTAL, float TOTAL) {
+    public Order(int ID_ORDER, String FK_IDENTIFICATION_NUMBER_EMPLOYEE, String FK_IDENTIFICATION_NUMBER_CUSTOMER, Date DATE_ORDER, float SUBTOTAL, float TOTAL) {
         this.ID_ORDER = ID_ORDER;
         this.FK_IDENTIFICATION_NUMBER_EMPLOYEE = FK_IDENTIFICATION_NUMBER_EMPLOYEE;
         this.FK_IDENTIFICATION_NUMBER_CUSTOMER = FK_IDENTIFICATION_NUMBER_CUSTOMER;
@@ -48,11 +51,11 @@ public class Order {
         this.FK_IDENTIFICATION_NUMBER_CUSTOMER = FK_IDENTIFICATION_NUMBER_CUSTOMER;
     }
 
-    public String getDATE_ORDER() {
+    public Date getDATE_ORDER() {
         return DATE_ORDER;
     }
 
-    public void setDATE_ORDER(String DATE_ORDER) {
+    public void setDATE_ORDER(Date DATE_ORDER) {
         this.DATE_ORDER = DATE_ORDER;
     }
 

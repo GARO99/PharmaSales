@@ -31,7 +31,6 @@ public class CustomersDAO {
             
             rs = ps.executeQuery();
             while (rs.next()) {
-                ct = new Customers();
                 ct.setIDENTIFICATION_NUMBER_CUSTOMER(rs.getString("IDENTIFICATION_NUMBER_CUSTOMER"));
                 ct.setIDENTIFICATION_TYPE(rs.getString("IDENTIFICATION_TYPE"));
                 ct.setFK_ID_IDENTIFICATION_TYPE(rs.getInt("FK_ID_IDENTIFICATION_TYPE"));
