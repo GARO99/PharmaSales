@@ -16,6 +16,33 @@ public class CustomersDAO {
     PreparedStatement ps;
     ResultSet rs;
     
+    public Customers getCustomer(String idNumber, String idType){
+        Customers ct = new Customers();
+        String query = "SELECT * FROM Customers WHERE IDENTIFICATION_NUMBER_CUSTOMER=? AND FK_ID_IDENTIFICATION_TYPE=?";
+        
+        try {
+            con = cn.GetConnection();
+            ps = con.prepareStatement(query);
+            
+            ps.setString(1, idNumber);
+            ps.setInt(2, Integer.parseInt(idType));
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ct = new Customers();
+                ct.setIDENTIFICATION_NUMBER_CUSTOMER(rs.getString("IDENTIFICATION_NUMBER_CUSTOMER"));
+                ct.setFK_ID_IDENTIFICATION_TYPE(rs.getInt("FK_ID_IDENTIFICATION_TYPE"));
+                ct.setFIRSTNAME(rs.getString("FIRSTNAME"));
+                ct.setLASTNAME(rs.getString("LASTNAME"));
+                ct.setADDRESS(rs.getString("ADDRESS"));
+                ct.setPHONE(rs.getString("PHONE"));
+            }
+        } catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return ct;
+    }
     
     public ArrayList<Customers> getCustomers(){
         Customers ct;

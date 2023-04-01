@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import DAO.CustomersDAO;
+import Models.Customers;
 import Utils.Constants.NavConstans;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Gustavo Andres Romero Ordoñez
  */
 public class SalesController extends HttpServlet {
+    
+    Customers cu = new Customers();
+    CustomersDAO cdao = new CustomersDAO();
 
     private NavConstans NavEnum;
     /**
@@ -30,6 +35,7 @@ public class SalesController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("cu", null);
         String action = request.getParameter("action");
         switch (action) {
             case NavConstans.NEW_SALES:
@@ -56,6 +62,7 @@ public class SalesController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
@@ -70,6 +77,20 @@ public class SalesController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String search = request.getParameter("searchCustomer");
+        if (search.equalsIgnoreCase("search")) {
+            String idType = request.getParameter("idType");
+            String idNumber = request.getParameter("idNumber");
+            cu = cdao.getCustomer(idNumber, idType);
+            if (cu.getIDENTIFICATION_NUMBER_CUSTOMER() != null) {
+                request.setAttribute("cu", cu);
+            } else {
+                response.sendError(0, "User not found");
+            }
+        }else {
+            response.sendError(0, "User not found");
+        }
+        request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
     }
 
     /**

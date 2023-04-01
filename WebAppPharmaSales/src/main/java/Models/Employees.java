@@ -24,7 +24,7 @@ public class Employees {
         this.ADDRESS = ADDRESS;
         this.FK_ID_IDENTIIFICATION_TYPE = FK_ID_IDENTIIFICATION_TYPE;
     }
-
+    
     public String getIDENTIFICATION_NUMBER_EMPLOYEE() {
         return IDENTIFICATION_NUMBER_EMPLOYEE;
     }
@@ -71,10 +71,6 @@ public class Employees {
 
     public void setFK_ID_IDENTIIFICATION_TYPE(int FK_ID_IDENTIIFICATION_TYPE) {
         this.FK_ID_IDENTIIFICATION_TYPE = FK_ID_IDENTIIFICATION_TYPE;
-    }
-
-    public Object getUSER() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
