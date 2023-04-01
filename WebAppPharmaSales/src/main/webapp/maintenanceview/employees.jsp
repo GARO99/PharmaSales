@@ -82,7 +82,7 @@
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-body">
-                            <table id="recordSalesDatatable" class="table table-bordered table-striped">
+                            <table id="employeesMaintenanceDatatable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#ID</th>
@@ -113,4 +113,20 @@
             theme: 'bootstrap4'
         })
     });
+</script>
+<script>
+$(function () {
+    $('#employeesMaintenanceDatatable').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+      }
+    });
+});
 </script>
