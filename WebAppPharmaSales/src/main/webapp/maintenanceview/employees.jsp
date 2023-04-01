@@ -33,7 +33,7 @@
                 <div class="col-md-5">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Agregar empleado</h3>
+                            <h3 class="card-title">Empleado</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -42,7 +42,7 @@
                                 <div class="form-row">
                                     <div class="col-md-2 mb-3">
                                         <label for="validationServer04">Tipo</label>
-                                        <select class="custom-select" id="validationServer04" required>
+                                        <select name="idType" class="custom-select" required <%= request.getAttribute("disabled")%> >
                                             <option selected value="">N/A</option>
                                             <option>TI</option>
                                             <option>CC</option>
@@ -51,30 +51,30 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="validationServer03">Numero de identificacion</label>
-                                        <input type="text" class="form-control" id="validationServer03" required>
+                                        <input name="idNumber" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="validationServer01">Nombre</label>
-                                        <input type="text" class="form-control" required>
+                                        <input name="firstName" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="validationServer02">Apellido</label>
-                                        <input type="text" class="form-control" required>
+                                        <input name="lastName" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="validationServer03">Celular</label>
-                                        <input type="text" class="form-control" id="validationServer03" required>
+                                        <input name="phone" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="validationServer03">Direccion</label>
-                                        <input type="text" class="form-control" id="validationServer03" required>
+                                        <input name="address" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                 </div>
-                                <button name="" value="" class="btn btn-primary" type="submit">Submit form</button>
+                                <button name="<%= request.getAttribute("act")%>" value="employees" class="btn btn-primary" type="submit" <%= request.getAttribute("disabled")%> ><%= request.getAttribute("msg")%></button>
                             </div>
                         </form>
                     </div>
@@ -82,6 +82,11 @@
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-body">
+                            <form method="post">
+                                <button class="btn btn-primary" name="change" value="add" type="submit">Agregar</button>
+                                <button class="btn btn-secondary">Activos</button>
+                                <button class="btn btn-secondary">Inactivos</button>
+                            </form>
                             <table id="employeesMaintenanceDatatable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -115,18 +120,18 @@
     });
 </script>
 <script>
-$(function () {
-    $('#employeesMaintenanceDatatable').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "language": {
-        "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
-      }
+    $(function () {
+        $('#employeesMaintenanceDatatable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+        });
     });
-});
 </script>

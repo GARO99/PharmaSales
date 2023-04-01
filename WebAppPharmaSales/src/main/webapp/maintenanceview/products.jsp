@@ -33,45 +33,51 @@
                 <div class="col-md-5">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Agregar producto</h3>
+                            <h3 class="card-title">Producto</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form>
+                        <form method="post">
                             <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationServer01">Codigo</label>
+                                        <input name="code" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
+                                    </div>
+                                </div>
                                 <div class="form-row">
                                     <div class="col-md-9 mb-3">
                                         <label for="validationServer01">Nombre</label>
-                                        <input type="text" class="form-control" required>
+                                        <input name="name" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="validationServer02">Iva</label>
-                                        <input type="text" class="form-control" id="validationServer02" required>
+                                        <input name="iva" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
                                         <label for="validationServer03">Precio</label>
-                                        <input type="text" class="form-control" id="validationServer03" required>
+                                        <input name="price" type="text" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="validationServer03">Fecha inicio</label>
-                                        <input type="date" class="form-control" id="validationServer03" required>
+                                        <input name="beginDate" type="date" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="validationServer03">Fecha fin</label>
-                                        <input type="date" class="form-control" id="validationServer03" required>
+                                        <input name="endDate" type="date" class="form-control" required <%= request.getAttribute("disabled")%> >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
+                                        <input name="stockeable" class="form-check-input" type="checkbox" <%= request.getAttribute("disabled")%> >
                                         <label class="form-check-label" for="invalidCheck3">
                                             Stockeable
                                         </label>
                                     </div>
                                 </div>
-                                <button name="" value="" class="btn btn-primary" type="submit">Submit form</button>
+                                <button name="<%= request.getAttribute("act")%>" value="products" class="btn btn-primary" type="submit" <%= request.getAttribute("disabled")%> ><%= request.getAttribute("msg")%></button>
                             </div>
                         </form>
                     </div>
@@ -79,6 +85,11 @@
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-body">
+                            <form method="post">
+                                <button class="btn btn-primary" name="change" value="add" type="submit">Agregar</button>
+                                <button class="btn btn-secondary">Activos</button>
+                                <button class="btn btn-secondary">Inactivos</button>
+                            </form>
                             <table id="productsMaintenanceDatatable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -114,18 +125,18 @@
     });
 </script>
 <script>
-$(function () {
-    $('#productsMaintenanceDatatable').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "language": {
-        "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
-      }
+    $(function () {
+        $('#productsMaintenanceDatatable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+        });
     });
-});
 </script>

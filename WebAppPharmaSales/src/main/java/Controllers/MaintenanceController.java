@@ -5,10 +5,11 @@
 package Controllers;
 
 import DAO.CustomersDAO;
+import DAO.ProductsDAO;
 import Models.Customers;
 import Utils.Constants.NavConstans;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +20,17 @@ import javax.servlet.http.HttpServletResponse;
  * @author PERSONAL
  */
 public class MaintenanceController extends HttpServlet {
-    
+
     Customers cu = new Customers();
     CustomersDAO cdao = new CustomersDAO();
-    
+    ProductsDAO pdao = new ProductsDAO();
+
+    String disabled = "disabled";
+    String act = "";
+    String msg = "­­ ";
+
     private NavConstans NavEnum;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,7 +42,9 @@ public class MaintenanceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("cu", null);
+        request.setAttribute("disabled", disabled);
+        request.setAttribute("act", act);
+        request.setAttribute("msg", msg);
         String action = request.getParameter("action");
         switch (action) {
             case NavConstans.PRODUCTS_MAINTENANCE:
@@ -65,7 +74,7 @@ public class MaintenanceController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**
@@ -80,20 +89,78 @@ public class MaintenanceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String search = request.getParameter("searchCustomer");
-        if (search.equalsIgnoreCase("search")) {
-            String idType = request.getParameter("idType");
-            String idNumber = request.getParameter("idNumber");
-            cu = cdao.getCustomer(idNumber, idType);
-            if (cu.getIDENTIFICATION_NUMBER_CUSTOMER() != null) {
-                request.setAttribute("cu", cu);
-            } else {
-                response.sendError(0, "User not found");
+        String add = request.getParameter("add");
+        String update = request.getParameter("update");
+        String change = request.getParameter("change");
+
+        if (add != null) {
+            switch (add) {
+                case "products":
+                    String code = request.getParameter("code");
+                    String name = request.getParameter("name");
+                    String iva = request.getParameter("iva");
+                    String price = request.getParameter("price");
+                    String beginDate = request.getParameter("beginDate");
+                    String endDate = request.getParameter("endDate");
+                    String stockeable = request.getParameter("stockeable");
+                    
+                    pdao.addProducts(code, name, Float.parseFloat(iva), Float.parseFloat(price), Date.valueOf(beginDate) , Date.valueOf(endDate), Boolean.valueOf(stockeable));
+                    
+                    break;
+                case "customers":
+
+                    break;
+                case "employees":
+
+                    break;
+                default:
+                    throw new AssertionError();
             }
-        }else {
-            response.sendError(0, "User not found");
         }
-        request.getRequestDispatcher("salesview/new.jsp").forward(request, response);
+
+        if (update != null) {
+            switch (update) {
+                case "products":
+
+                    break;
+                case "customers":
+
+                    break;
+                case "employees":
+
+                    break;
+                default:
+                    request.getRequestDispatcher("maintenanceview/").forward(request, response);
+                    throw new AssertionError();
+            }
+        }
+
+        if (change != null) {
+            switch (change) {
+                case "add":
+                    disabled = "";
+                    act = "add";
+                    msg = "Agregar";
+                    request.setAttribute("disabled", disabled);
+                    request.setAttribute("act", act);
+                    request.setAttribute("msg", msg);
+                    request.getRequestDispatcher("maintenanceview/").forward(request, response);
+                    break;
+                case "update":
+                    disabled = "";
+                    act = "update";
+                    msg = "Modificar";
+                    request.setAttribute("disabled", disabled);
+                    request.setAttribute("act", act);
+                    request.setAttribute("msg", msg);
+                    request.getRequestDispatcher("maintenanceview/").forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("maintenanceview/").forward(request, response);
+                    throw new AssertionError();
+            }
+        }
+
     }
 
     /**
