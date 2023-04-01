@@ -11,17 +11,19 @@ public class Customers {
     String PHONE;
     String ADDRESS;
     int FK_ID_IDENTIFICATION_TYPE;
+    String IDENTIFICATION_TYPE;
 
     public Customers() {
     }
 
-    public Customers(String IDENTIFICATION_NUMBER_CUSTOMER, String FIRSTNAME, String LASTNAME, String PHONE, String ADDRESS, int FK_ID_IDENTIFICATION_TYPE) {
+    public Customers(String IDENTIFICATION_NUMBER_CUSTOMER, String FIRSTNAME, String LASTNAME, String PHONE, String ADDRESS, int FK_ID_IDENTIFICATION_TYPE, String IDENTIFICATION_TYPE) {
         this.IDENTIFICATION_NUMBER_CUSTOMER = IDENTIFICATION_NUMBER_CUSTOMER;
         this.FIRSTNAME = FIRSTNAME;
         this.LASTNAME = LASTNAME;
         this.PHONE = PHONE;
         this.ADDRESS = ADDRESS;
         this.FK_ID_IDENTIFICATION_TYPE = FK_ID_IDENTIFICATION_TYPE;
+        this.IDENTIFICATION_TYPE = IDENTIFICATION_TYPE;
     }
 
     public String getIDENTIFICATION_NUMBER_CUSTOMER() {
@@ -71,7 +73,12 @@ public class Customers {
     public void setFK_ID_IDENTIFICATION_TYPE(int FK_ID_IDENTIFICATION_TYPE) {
         this.FK_ID_IDENTIFICATION_TYPE = FK_ID_IDENTIFICATION_TYPE;
     }
-    
-    
-    
+
+    public String getIDENTIFICATION_TYPE() {
+        return IDENTIFICATION_TYPE;
+    }
+
+    public void setIDENTIFICATION_TYPE(String IDENTIFICATION_TYPE) {
+        this.IDENTIFICATION_TYPE = IDENTIFICATION_TYPE;
+    }
 }

@@ -40,7 +40,7 @@
                         <form action="" method="post">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Tipo</label>
+                                    <label>Tipo de Identificación</label>
                                     <select name="idType" class="form-control select2bs4" style="width: 100%;">
                                         <option value="1">N/A</option>
                                         <option value="2">TI</option>
@@ -56,7 +56,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" name="searchCustomer" value="search" class="btn btn-primary">Buscar</button>
+                                <button type="submit" name="search" value="searchCustomer" class="btn btn-primary">Buscar</button>
                             </div>
                         </form>
                     </div>
@@ -109,17 +109,15 @@
                             <h3 class="text-center"><b>VENTA</b></h3>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <%
-                                        Customers cu = new Customers();
-                                        if (request.getAttribute("cu") != null) {
-                                            cu = (Customers) request.getAttribute("cu");
-                                        }
-                                    %>
                                     <h3 class="card-title"><b>Cliente</b></h3>
-                                    <p class="card-text"><b>Tipo de identificación</b>: <% cu.getFK_ID_IDENTIFICATION_TYPE(); %></p>
-                                    <p class="card-text"><b>Numero de identificación</b>: <% cu.getIDENTIFICATION_NUMBER_CUSTOMER(); %></p>
+                                    <p class="card-text"><b>Tipo de identificación</b>: ${customers.getIDENTIFICATION_TYPE()} </p>
+                                    <p class="card-text"><b>Numero de identificación</b>: ${customers.getIDENTIFICATION_NUMBER_CUSTOMER()}</p>
                                 </div>
-                                
+                                <div>
+                                    <p class="card-text"><b>Nombre completo</b>: ${customers.getFIRSTNAME()} ${customers.getLASTNAME()}</p>
+                                    <p class="card-text"><b>Telefono</b>: ${customers.getPHONE()}</p>
+                                    <p class="card-text"><b>Direccion</b>: ${customers.getADDRESS()}</p>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
